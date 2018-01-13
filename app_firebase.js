@@ -47,3 +47,15 @@ $("#login-button").on("click", function(event) {
 });
 
 
+// 3 Firebase event for adding data when user submits an entry 
+database.ref().on("child_added", function(childSnapshot, prevChildKey) {
+    console.log(childSnapshot.val());
+
+    //store in vars 
+    var userName = childSnapshot.val().userName;
+    var userPassWord = childSnapshot.val().userPassWord;
+
+    //log to console 
+    console.log(userName);
+    console.log(userPassWord);
+});
