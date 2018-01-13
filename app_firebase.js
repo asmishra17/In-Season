@@ -3,7 +3,9 @@
 console.log("we are linked");
 //1. Global vars and firebase set up
 
- //important note - for dev purposes I have removed authentication so we can test database connections / storate /updates ETC
+ //important note - for dev purposes I have removed authentication so we can test database connections / storage /updates ETC
+
+ //next iteration - saving user history - this is a bigger problem to solve and will take more time
 
 var config = {
     apiKey: "AIzaSyC443Ww585g_rt44P6U4Wd0FM35APRuh2w",
@@ -20,7 +22,7 @@ var config = {
 
   var database = firebase.database();
 
-//2. store login info for the users  via login button (dummy credentials for login)
+//2. store login info for the users  via login button 
 
 $("#login-button").on("click", function(event) {
     event.preventDefault();
@@ -44,6 +46,11 @@ $("#login-button").on("click", function(event) {
 
     console.log(newUser.userName);
     console.log(newUser.userPassWord);
+
+
+    //empty the text-boxes 
+    $("#username-input").val("");
+    $("password-input").val("");
 });
 
 
