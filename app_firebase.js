@@ -1,4 +1,5 @@
 //linking document 
+//tasks for wednesday/thurs - organize code better. make functions in scope. Fix logic for box checking and input forms
 
 console.log("we are linked");
 //1. Global vars and firebase set up
@@ -48,9 +49,9 @@ $("#login-button").on("click", function(event) {
     console.log(newUser.userName);
     console.log(newUser.userPassWord);
 
-    // here's a link to modals - https://getbootstrap.com/docs/3.3/javascript/#modals
-    $('#myModal').modal();
-    
+
+ 
+   
     
 
 
@@ -59,6 +60,24 @@ $("#login-button").on("click", function(event) {
     $("#username-input").val("");
     $("password-input").val("");
 });
+
+
+    //checking /unchecking box status
+    var checkboxes = $('input[name="agree"]');
+    console.log(checkboxes);
+    checkboxes.change(function () {
+        var checked = $(this).prop('checked');
+        console.log(checked);
+        // if (checked === false) {
+        //     $("#myModal").modal();
+        //     $("#exampleModalLabel").text("Login Failure");
+        //     $("#modal-body").text("You must agree to terms and conditions to continue.");
+        // } else {
+        //     $('#myModal').modal();
+        // }
+    });
+
+
 
 
 // 3 Firebase event for adding data when user submits an entry 
@@ -72,4 +91,21 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
     //log to console 
     console.log(userName);
     console.log(userPassWord);
+
+       
+
+        //seeing if i can get chcked /unchecked first 
+      // here's a link to modals - https://getbootstrap.com/docs/3.3/javascript/#modals
+//    if (childSnapshot.val().userName != "" && childSnapshot.val().userPassWord != "") {
+//     $('#myModal').modal();
+   
+//     } else {
+//         $("#myModal").modal();
+//         $("#exampleModalLabel").text("Login Failure");
+//         $("#modal-body").text("login failed. Please complete all required fields.");
+ 
+//     }
+        //if modal data is not complete, prompt user to do that again.
 });
+
+ 
