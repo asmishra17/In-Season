@@ -49,9 +49,10 @@ $("#login-button").on("click", function(event) {
     console.log(newUser.userPassWord);
 
     // here's a link to modals - https://getbootstrap.com/docs/3.3/javascript/#modals
-    $("#login-modal").on("show.modal", function (event) {
+    $('#myModal').modal();
+    
+    
 
-    })
 
 
     //empty the text-boxes 
