@@ -28,6 +28,7 @@ $("#login-button").on("click", function(event) {
     event.preventDefault();
 
     //obtain user input 
+    //next ieration - store user history - we can do this by adding on properties to the objectt
 
     var userName = $("#username-input").val().trim();
     var userPassWord = $("#password-input").val().trim();
@@ -46,6 +47,11 @@ $("#login-button").on("click", function(event) {
 
     console.log(newUser.userName);
     console.log(newUser.userPassWord);
+
+    // here's a link to modals - https://getbootstrap.com/docs/3.3/javascript/#modals
+    $("#login-modal").on("show.modal", function (event) {
+
+    })
 
 
     //empty the text-boxes 
