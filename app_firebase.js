@@ -5,8 +5,7 @@ console.log("we are linked");
 
  //important note - for dev purposes I have removed authentication so we can test database connections / storage /updates ETC
 
- //next iteration - saving user history - this is a bigger problem to solve and will take more time
- // see this link -http://api.jquery.com/prop/
+ 
 
 var config = {
     apiKey: "AIzaSyC443Ww585g_rt44P6U4Wd0FM35APRuh2w",
@@ -37,7 +36,6 @@ var config = {
         $("#login-button").prop("disabled", false);
     
 
-  //if checkbox input is clicked, then  enable the login button, make into event listener
 
 
 });
@@ -68,7 +66,7 @@ $("#login-button").on("click", function(event) {
     console.log(newUser.userEmail);
 
     //empty the text-boxes 
-    $("#username-input").val("");
+    // $("#username-input").val("");
     //show sign up sucess!
     $('#myModal').modal();
 
