@@ -1,5 +1,4 @@
 //linking document 
-//tasks for wednesday/thurs - organize code better. make functions in scope. Fix logic for box checking and input forms
 
 console.log("we are linked");
 //1. Global vars and firebase set up
@@ -7,6 +6,7 @@ console.log("we are linked");
  //important note - for dev purposes I have removed authentication so we can test database connections / storage /updates ETC
 
  //next iteration - saving user history - this is a bigger problem to solve and will take more time
+ // see this link -http://api.jquery.com/prop/
 
 var config = {
     apiKey: "AIzaSyC443Ww585g_rt44P6U4Wd0FM35APRuh2w",
@@ -23,22 +23,41 @@ var config = {
 
   var database = firebase.database();
 
-//2. store login info for the users  via login button 
+  //global vars 
+  var zipCode; 
+  var searchQuery;
+  var date;
+
+
+  $("#login-button").prop("disabled", true);
+
+  
+  $("#I-agree").on("click", function() {
+        console.log("I was clicked"); 
+        $("#login-button").prop("disabled", false);
+    
+
+  //if checkbox input is clicked, then  enable the login button, make into event listener
+
+
+});
+
+ 
+
+//start on-click function 
 
 $("#login-button").on("click", function(event) {
     event.preventDefault();
 
-    //obtain user input 
-    //next ieration - store user history - we can do this by adding on properties to the objectt
 
-    var userName = $("#username-input").val().trim();
-    var userPassWord = $("#password-input").val().trim();
+    //get user email from input 
+    var userEmail = $("#username-input").val().trim();
 
-    //let's put this in an object 
 
+//store user history, make a new object per user 
     var newUser = {
-        userName: userName,
-        passowrd: userPassWord
+        userEmail: userEmail,
+       
     };
 
     //push to database
@@ -46,35 +65,14 @@ $("#login-button").on("click", function(event) {
 
     //log to console for testing purpose
 
-    console.log(newUser.userName);
-    console.log(newUser.userPassWord);
+    console.log(newUser.userEmail);
 
     //empty the text-boxes 
     $("#username-input").val("");
-    $("password-input").val("");
-
+    //show sign up sucess!
     $('#myModal').modal();
+
 });
-
-
-
-
-    // //checking /unchecking box status
-    // var checkboxes = $('input[name="agree"]');
-    // console.log(checkboxes);
-    // checkboxes.change(function () {
-    //     var checked = $(this).prop('checked');
-    //     console.log(checked);
-    //     // if (checked === false) {
-    //     //     $("#myModal").modal();
-    //     //     $("#exampleModalLabel").text("Login Failure");
-    //     //     $("#modal-body").text("You must agree to terms and conditions to continue.");
-    //     // } else {
-    //     //     $('#myModal').modal();
-    //     // }
-    // });
-
-
 
 
 // 3 Firebase event for adding data when user submits an entry 
@@ -83,26 +81,9 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
 
     //store in vars 
     var userName = childSnapshot.val().userName;
-    var userPassWord = childSnapshot.val().userPassWord;
 
     //log to console 
-    console.log(userName);
-    console.log(userPassWord);
-
-       
-
-        //seeing if i can get chcked /unchecked first 
-      // here's a link to modals - https://getbootstrap.com/docs/3.3/javascript/#modals
-//    if (childSnapshot.val().userName != "" && childSnapshot.val().userPassWord != "") {
-//     $('#myModal').modal();
-   
-//     } else {
-//         $("#myModal").modal();
-//         $("#exampleModalLabel").text("Login Failure");
-//         $("#modal-body").text("login failed. Please complete all required fields.");
- 
-//     }
-        //if modal data is not complete, prompt user to do that again.
+    console.log(userName);       
 });
 
  
