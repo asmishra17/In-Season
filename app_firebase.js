@@ -49,33 +49,30 @@ $("#login-button").on("click", function(event) {
     console.log(newUser.userName);
     console.log(newUser.userPassWord);
 
-
- 
-   
-    
-
-
-
     //empty the text-boxes 
     $("#username-input").val("");
     $("password-input").val("");
+
+    $('#myModal').modal();
 });
 
 
-    //checking /unchecking box status
-    var checkboxes = $('input[name="agree"]');
-    console.log(checkboxes);
-    checkboxes.change(function () {
-        var checked = $(this).prop('checked');
-        console.log(checked);
-        // if (checked === false) {
-        //     $("#myModal").modal();
-        //     $("#exampleModalLabel").text("Login Failure");
-        //     $("#modal-body").text("You must agree to terms and conditions to continue.");
-        // } else {
-        //     $('#myModal').modal();
-        // }
-    });
+
+
+    // //checking /unchecking box status
+    // var checkboxes = $('input[name="agree"]');
+    // console.log(checkboxes);
+    // checkboxes.change(function () {
+    //     var checked = $(this).prop('checked');
+    //     console.log(checked);
+    //     // if (checked === false) {
+    //     //     $("#myModal").modal();
+    //     //     $("#exampleModalLabel").text("Login Failure");
+    //     //     $("#modal-body").text("You must agree to terms and conditions to continue.");
+    //     // } else {
+    //     //     $('#myModal').modal();
+    //     // }
+    // });
 
 
 
