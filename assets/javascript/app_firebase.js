@@ -60,7 +60,7 @@ $("#login-button").on("click", function(event) {
 
     //get user email from input 
     
-    var userEmail = $("#username").val().trim();
+    var userEmail = $("#username-input").val().trim();
 
 
 //store user history, make a new object per user 
