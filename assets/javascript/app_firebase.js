@@ -2,6 +2,7 @@
 
 console.log("we are linked");
 //1. Global vars and firebase set up
+//set ref etc
 
  //important note - for dev purposes I have removed authentication so we can test database connections / storage /updates ETC
 
@@ -21,13 +22,20 @@ var config = {
 
   var database = firebase.database();
 
-  //global vars 
-var userCity;
-var userDestination;
-//empty object that we populate later 
+  var usersRef = firebase.database().ref("/users");
+
+  //function to write user data to firebase --still logging it as ID and then username
+  function writeUserData(userId, userName, userCity, userDestination) {
+      firebase.database().ref('users/' + userId).set({
+          username: userName,
+          userCity: userCity,
+          userDestination: userDestination
 
 
-var newUser = {};
+      });
+  }
+
+
 
   $("#login-button").prop("disabled", true);
 
@@ -40,8 +48,6 @@ var newUser = {};
 
 
 });
-
- 
 
 //start on-click function for login button 
 
@@ -75,7 +81,7 @@ $("#login-button").on("click", function(event) {
 
 
 // 3 Firebase event for adding data when user submits an entry 
-database.ref().on("child_added", function(childSnapshot, prevChildKey) {
+database.ref("/users").on("child_added", function(childSnapshot, prevChildKey) {
     console.log(childSnapshot.val());
 
     //store in vars 
@@ -107,12 +113,13 @@ $("#search-travel-info").on("click", function() {
     //add properties to the object 
 
 
+
     // newUser.userCity = 'userCity';
     // newUser.userDestination = 'userDestination';
 
     
 
-
+ 
     //push to database
     // database.ref().push(newUser.userCity);
     // database.ref().push(newUser.userDestination);
