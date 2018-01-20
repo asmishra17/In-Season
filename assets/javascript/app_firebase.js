@@ -6,7 +6,8 @@ console.log("we are linked");
 
  //important note - for dev purposes I have removed authentication so we can test database connections / storage /updates ETC
 
- 
+ //firebase functions 
+
 var config = {
     apiKey: "AIzaSyC443Ww585g_rt44P6U4Wd0FM35APRuh2w",
     authDomain: "in-season-8f60b.firebaseapp.com",
@@ -19,10 +20,13 @@ var config = {
 
   firebase.initializeApp(config);
 
-
+//setting up root directory 
   var database = firebase.database();
 
   var usersRef = firebase.database().ref("/users");
+
+ //add another user 
+ var newUser = firebase.database().ref().child("/users");
 
   //function to write user data to firebase --still logging it as ID and then username
   function writeUserData(userId, userName, userCity, userDestination) {
@@ -31,12 +35,11 @@ var config = {
           userCity: userCity,
           userDestination: userDestination
 
-
       });
   }
 
 
-
+  //click events 
   $("#login-button").prop("disabled", true);
 
   
@@ -57,7 +60,7 @@ $("#login-button").on("click", function(event) {
 
     //get user email from input 
     
-    var userEmail = $("#username-input").val().trim();
+    var userEmail = $("#username").val().trim();
 
 
 //store user history, make a new object per user 
@@ -112,14 +115,9 @@ $("#search-travel-info").on("click", function() {
 
     //add properties to the object 
 
+    newUser.userCity = 'userCity';
+    newUser.userDestination = 'userDestination';
 
-
-    // newUser.userCity = 'userCity';
-    // newUser.userDestination = 'userDestination';
-
-    
-
- 
     //push to database
     // database.ref().push(newUser.userCity);
     // database.ref().push(newUser.userDestination);
