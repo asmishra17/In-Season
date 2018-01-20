@@ -1,6 +1,7 @@
 // function getEvent() {
 //     var object = $(this).attr('data-name');
 
+
 //     //var zipcode = $("#zipsubmit").val().trim();//
 //     var zipcode = 60646;
 //     console.log(zipcode);
@@ -28,3 +29,4 @@
 // }
 
 // getEvent();
+
