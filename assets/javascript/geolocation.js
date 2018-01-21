@@ -62,7 +62,8 @@ function showPosition(position) {
         $(".weather-icons").html(`<div class="stormy col-md-6"></div>`);
     }
     
-        $("#weatherHere").html(`<h4> ${Math.round(response.main.temp*(9/5) -459.67)} &deg F in ${response.name} with ${response.weather[0].description} </h4> <img src="http://openweathermap.org/img/w/${response.weather[0].icon}.png">`);
+        $("#weatherHere").html(`<h4 class="text-center center-block displayBottom"> ${Math.round(response.main.temp*(9/5) -459.67)} &deg F in ${response.name} with ${response.weather[0].description} </h4>`);
+        // <img src="http://openweathermap.org/img/w/${response.weather[0].icon}.png">
         yourCity= response.name;
         console.log(yourCity);      
     })

@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box;
+}
 .Absolute-Center {
     margin: auto;
     position: absolute;
@@ -20,9 +23,31 @@
     background-image:url('http://placehold.it/200x30/000000/ffffff/&text=BRAND+LOGO');
   }
 
+  #weatherHere {
+    border: 0px solid currentColor;
+    margin-top: 10px;
+    margin-bottom: 0px;
+  }
+
+  .weather-display-row{
+    width: 100%;
+   position: absolute;
+   bottom: 0;
+   left: 34em;
+   margin-top: 10px;
+  }
+
   #weatherHere img{
     width: 80px;
     height: 80px;
+  }
+
+  .weather-container {
+    height: 250px;
+  }
+
+  .weather-icons{
+    margin-right: 50px;
   }
 
   .dayWeather{
@@ -32,11 +57,10 @@
   }
 
   .nightWeather{
-    background-color: rgb(11, 27, 71); 
+    background-color: navy; 
     margin: auto;
     border: white 1px solid; 
     color: white;
-
   }
 
 /* SUNNY */
@@ -45,10 +69,6 @@
 	background: linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 100%); 
 	height: 140px;
 	width: 20px; 
-	margin-left: -15px;
-	position: absolute;
-	left: 90px;  
-	top: 20px;
 }
 .sunny:before {
 	background: linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 100%);
@@ -56,9 +76,6 @@
 	height: 140px; 
 	width: 20px;
 	opacity: 1; 
-	position: absolute;
-	bottom: 0px;
-	left: 0px; 
 	transform: rotate(90deg);
 }
 .sunny:after {
