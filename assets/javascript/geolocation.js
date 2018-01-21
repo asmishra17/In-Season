@@ -9,6 +9,9 @@ $("#login").on("click", function(){
 })
 
 
+
+
+
 // Using HTML GEOLOCATION API to grab user location 
 var yourZip;
 getLocation();
