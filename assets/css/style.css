@@ -2,66 +2,74 @@
   box-sizing: border-box;
 }
 .Absolute-Center {
-    margin: auto;
-    position: absolute;
-    top: 0; left: 0; bottom: 0; right: 0;
-  }
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
   
-  .Absolute-Center.is-Responsive {
-    width: 50%; 
-    height: 50%;
-    min-width: 200px;
-    max-width: 400px;
-    padding: 40px;
-  }
+.Absolute-Center.is-Responsive {
+  width: 50%; 
+  height: 50%;
+  min-width: 200px;
+  max-width: 400px;
+  padding: 40px;
+}
   
-  #logo-container{
-    margin: auto;
-    margin-bottom: 10px;
-    width:200px;
-    height:30px;
-    background-image:url('http://placehold.it/200x30/000000/ffffff/&text=BRAND+LOGO');
-  }
+#logo-container{
+  margin: auto;
+  margin-bottom: 10px;
+  width:200px;
+  height:30px;
+  background-image:url('http://placehold.it/200x30/000000/ffffff/&text=BRAND+LOGO');
+}
 
-  #weatherHere {
-    border: 0px solid currentColor;
-    margin-top: 10px;
-    margin-bottom: 0px;
-  }
+.weather-displays{
+  position: absolute;
+  top:0;
+  left:23em;
+}
 
-  .weather-display-row{
-    width: 100%;
-   position: absolute;
-   bottom: 0;
-   left: 34em;
-   margin-top: 10px;
-  }
+#weatherHere {
+  border: 0px solid currentColor;
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
 
-  #weatherHere img{
-    width: 80px;
-    height: 80px;
-  }
+.weather-display-row{
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 34em;
+  margin-top: 10px;
+}
 
-  .weather-container {
-    height: 250px;
-  }
+#weatherHere img{
+  width: 80px;
+  height: 80px;
+}
 
-  .weather-icons{
-    margin-right: 50px;
-  }
+.weather-container {
+  height: 250px;
+  margin-bottom: 20px;
+}
 
-  .dayWeather{
-    background-color: rgb(120, 193, 212); 
-    margin: auto;
-    border: white 1px solid; 
-  }
+.weather-icons{
+  margin-right: 50px;
+  margin-top: 10px;
+}
 
-  .nightWeather{
-    background-color: navy; 
-    margin: auto;
-    border: white 1px solid; 
-    color: white;
-  }
+.dayWeather{
+  background-color: rgb(120, 193, 212); 
+  margin: auto;
+  border: white 1px solid; 
+}
+
+.nightWeather{
+  background-color: navy; 
+  margin: auto;
+  border: white 1px solid; 
+  color: white;
+}
 
 /* SUNNY */
 .sunny { 
@@ -109,8 +117,8 @@
 	width: 50px; 
 	margin-left: -60px;
 	position: absolute;
-	left: 255px;
-	top: 70px; 
+	left: 633px;
+	top: 80px; 
 }
 .cloudy:after {
 	animation: cloudy_shadow 5s ease-in-out infinite;
@@ -148,8 +156,8 @@
 	width: 50px;
 	margin-left: -60px;
 	position: absolute;
-	left: 427px;
-	top: 70px;
+	left: 633px;
+	top: 80px;
 }
 .rainy:after {
 	animation: rainy_shadow 5s ease-in-out infinite 1s;
@@ -393,8 +401,8 @@
 	width: 50px; 
 	margin-left: -70px; 
 	position: absolute;
-	left: 947px; 
-	top: 70px; 
+	left: 633px; 
+	top: 80px; 
 }
 .stormy:after {
 	animation: stormy_shadow 5s ease-in-out infinite;
@@ -454,8 +462,7 @@
 	width: 50px;
 	margin-left: -60px;
 	position: absolute;
-	left: 1112px;
-	top: 70px;
+	top: 80px;
 }
 .snowy:after {
 	animation: snowy_shadow 5s ease-in-out infinite 1s;

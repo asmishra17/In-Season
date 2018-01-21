@@ -40,11 +40,14 @@ function showPosition(position) {
        console.log(response.weather[0].icon.charAt(2));
        var iconLetter =response.weather[0].icon.charAt(2);
        var weatherDescription = response.weather[0].main;
+       $(".weather-displays").text(`Today's Weather`);
 
     //    Changing background color of Weather if it is day or night 
        if (iconLetter === "d") {
+            $(".weather-container").removeClass("nightWeather");
            $(".weather-container").addClass("dayWeather");
        } else if (iconLetter === "n"){
+            $(".weather-container").removeClass("dayWeather");
            $(".weather-container").addClass("nightWeather");
        }
     // changing Weather Icon given conditions
@@ -62,7 +65,7 @@ function showPosition(position) {
         $(".weather-icons").html(`<div class="stormy col-md-6"></div>`);
     }
     
-        $("#weatherHere").html(`<h4 class="text-center center-block displayBottom"> ${Math.round(response.main.temp*(9/5) -459.67)} &deg F in ${response.name} with ${response.weather[0].description} </h4>`);
+        $("#weatherHere").html(`<h5 class="text-center center-block displayBottom"> ${Math.round(response.main.temp*(9/5) -459.67)} &deg F in ${response.name} with ${response.weather[0].description} </h5>`);
         // <img src="http://openweathermap.org/img/w/${response.weather[0].icon}.png">
         yourCity= response.name;
         console.log(yourCity);      
