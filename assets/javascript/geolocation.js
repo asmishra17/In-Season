@@ -8,9 +8,10 @@ $("#login").on("click", function(){
     console.log($("#password").val());
 })
 
-var yourZip;
 
 // Using HTML GEOLOCATION API to grab user location 
+var yourZip;
+getLocation();
 
 function getLocation() {
     if (navigator.geolocation) {
@@ -26,9 +27,6 @@ function showPosition(position) {
    console.log( "Latitude: " + position.coords.latitude + 
     "<br>Longitude: " + position.coords.longitude);
     var APIKey = "739b19c2f23e5d1f4b6dc5cd5bbed8a3";
-    // var zipCode = position.address.postalCode;
-    // console.log(zipCode);
-    // var queryURL = "https://api.openweathermap.org/data/2.5/weather?" + "zip=" + zipCode + ",us&units=imperial&appid=" + APIKey; 
     var queryURL ="https://api.openweathermap.org/data/2.5/weather?" + "lat=" + position.coords.latitude + "&lon=" + position.coords.longitude + "&appid=" + APIKey; 
     
     $.ajax({
@@ -38,9 +36,37 @@ function showPosition(position) {
     
     .done(function(response) {
         console.log(queryURL);
-        console.log(response);
+        console.log(response); 
+       console.log(response.weather[0].icon.charAt(2));
+       var iconLetter =response.weather[0].icon.charAt(2);
+       var weatherDescription = response.weather[0].main;
+       $(".weather-displays").text(`Today's Weather`);
+
+    //    Changing background color of Weather if it is day or night 
+       if (iconLetter === "d") {
+            $(".weather-container").removeClass("nightWeather");
+           $(".weather-container").addClass("dayWeather");
+       } else if (iconLetter === "n"){
+            $(".weather-container").removeClass("dayWeather");
+           $(".weather-container").addClass("nightWeather");
+       }
+    // changing Weather Icon given conditions
+    if (weatherDescription === "Clear" && iconLetter === "d") {
+        $(".weather-icons").html(`<div class="sunny col-md-6"></div>`);
+    } else if (weatherDescription === "Clouds" || weatherDescription === "Mist" || weatherDescription === "Fog"){
+        $(".weather-icons").html(`<div class="cloudy col-md-6"></div>`);
+    } else if (weatherDescription === "Rain" || weatherDescription === "Drizzle"){
+        $(".weather-icons").html(`<div class="rainy col-md-6"></div>`);
+    } else if (weatherDescription === "Snow"){
+        $(".weather-icons").html(`<div class="snowy col-md-6"></div>`);
+    } else if (weatherDescription === "Clear" || iconLetter === "n") {
+        $(".weather-icons").html(`<div class="starry col-md-6"></div>`);
+    } else if (weatherDescription === "Thunderstorm"){
+        $(".weather-icons").html(`<div class="stormy col-md-6"></div>`);
+    }
     
-        $("#weatherHere").html("<h3>" + Math.round(response.main.temp*(9/5) -459.67) + " fahrenheit for your city " + response.name + " with " +response.weather[0].description + "</h3>");
+        $("#weatherHere").html(`<h5 class="text-center center-block displayBottom"> ${Math.round(response.main.temp*(9/5) -459.67)} &deg F in ${response.name} with ${response.weather[0].description} </h5>`);
+        // <img src="http://openweathermap.org/img/w/${response.weather[0].icon}.png">
         yourCity= response.name;
         console.log(yourCity);      
     })
@@ -64,8 +90,6 @@ function showPosition(position) {
 }
 
 
-getLocation();
-
 
 function getEvent() {
     var object = $(this).attr('data-name');
@@ -87,11 +111,23 @@ function getEvent() {
         // $("#eventHere").html("<h1>" + response.main.zipcode + " events in your city " + response.name + "</h1>"); 
         console.log(SeatGeekqueryURL);
         console.log(response);
-        $("#event-info").empty();
+        $("#eventsinUserArea").html(`<div class="center-block text-center"><h3 class="teal-text teal-accent-4">Events in ${yourZip}</h3></div>`);
+
+        $('#event-list').empty();
+
         for (var i=0; i < response.events.length;i++ ) {
-            var newDiv = $("<div>");
-            newDiv.html(response.events[i].short_title);
-            $("#event-info").append(newDiv);
+            var title = response.events[i].short_title;
+            var date = response.events[i].datetime_local.split("T")[0];
+            var url = response.events[i].url;
+            var newDiv = $('<li>');
+            var titleDiv = $('<a target="_blank" href="' + url + '"><h5>' + title + '</h5></a>');
+            var dateDiv = $('<h5>' + date + '</h5>');
+            newDiv.append(titleDiv);
+            newDiv.append(dateDiv)
+                //newDiv.html(response.events[i].short_title);
+            $("#event-list").append(newDiv);
+
+
         }
     })
 }
