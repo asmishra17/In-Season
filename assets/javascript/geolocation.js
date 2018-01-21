@@ -10,27 +10,90 @@ $("#login").on("click", function(){
 
 
 
-
-
 // Using HTML GEOLOCATION API to grab user location 
 var yourZip;
-getLocation();
+
+if(yourZip ==null){
+    getLocation();
+}
+
+$(".searchZip").on("click", function(event){
+    event.preventDefault();
+    var newZip= $("#ZipCode").val();
+    console.log(newZip);
+    console.log(Number.isInteger(Number(newZip)));
+    if (newZip.length ===5 && Number.isInteger(Number(newZip)) == true){
+        console.log(`zip code`);
+        yourZip= newZip;
+        getEvent();
+        callOpenWeatherbyZip(yourZip);
+        $('.cancel').click();
+    } else{ 
+        console.log(`not a zip code`);
+        $(".modal-footer").html(`<p class="red-text text-center">Not a Valid Zip Code</p>`);
+        setTimeout(function(){
+            $(".modal-footer").empty();
+        }, 3000);
+    }
+})
 
 function getLocation() {
     if (navigator.geolocation) {
         // //google maps api 
-        navigator.geolocation.getCurrentPosition(showPosition);
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
     } else { 
         console.log("Geolocation is not supported by this browser.");
     }
 }
 
+function callOpenWeatherbyZip(zip){
+    var APIKey = "739b19c2f23e5d1f4b6dc5cd5bbed8a3";
+    var ZipqueryURL = "https://api.openweathermap.org/data/2.5/weather?" + "zip=" + zip + ",us&units=imperial&appid=" + APIKey; 
+    $.ajax({
+        url: ZipqueryURL,
+        method: "GET"
+    })
+    .done(function(response){
+        console.log(ZipqueryURL);
+        console.log(response); 
+       console.log(response.weather[0].icon.charAt(2));
+       var iconLetter =response.weather[0].icon.charAt(2);
+       var weatherDescription = response.weather[0].main;
+       $(".weather-displays").text(`Today's Weather`);
+
+    //    Changing background color of Weather if it is day or night 
+       if (iconLetter === "d") {
+            $(".weather-container").removeClass("nightWeather");
+           $(".weather-container").addClass("dayWeather");
+       } else if (iconLetter === "n"){
+            $(".weather-container").removeClass("dayWeather");
+           $(".weather-container").addClass("nightWeather");
+       }
+    // changing Weather Icon given conditions
+    if (weatherDescription === "Clear" && iconLetter === "d") {
+        $(".weather-icons").html(`<div class="sunny col-md-6"></div>`);
+    } else if (weatherDescription === "Clouds" || weatherDescription === "Mist" || weatherDescription === "Fog"){
+        $(".weather-icons").html(`<div class="cloudy col-md-6"></div>`);
+    } else if (weatherDescription === "Rain" || weatherDescription === "Drizzle"){
+        $(".weather-icons").html(`<div class="rainy col-md-6"></div>`);
+    } else if (weatherDescription === "Snow"){
+        $(".weather-icons").html(`<div class="snowy col-md-6"></div>`);
+    } else if (weatherDescription === "Clear" || iconLetter === "n") {
+        $(".weather-icons").html(`<div class="starry col-md-6"></div>`);
+    } else if (weatherDescription === "Thunderstorm"){
+        $(".weather-icons").html(`<div class="stormy col-md-6"></div>`);
+    }
+    
+        $("#weatherHere").html(`<h5 class="text-center center-block displayBottom"> ${Math.round(response.main.temp)} &deg F in ${response.name} with ${response.weather[0].description} </h5>`);
+
+    });
+}
 
 function showPosition(position) {
    console.log( "Latitude: " + position.coords.latitude + 
     "<br>Longitude: " + position.coords.longitude);
     var APIKey = "739b19c2f23e5d1f4b6dc5cd5bbed8a3";
-    var queryURL ="https://api.openweathermap.org/data/2.5/weather?" + "lat=" + position.coords.latitude + "&lon=" + position.coords.longitude + "&appid=" + APIKey; 
+    var queryURL ="https://api.openweathermap.org/data/2.5/weather?" + "lat=" + position.coords.latitude + "&lon=" + position.coords.longitude + "&units=imperial&appid=" + APIKey; 
     
     $.ajax({
         url: queryURL,
@@ -68,10 +131,8 @@ function showPosition(position) {
         $(".weather-icons").html(`<div class="stormy col-md-6"></div>`);
     }
     
-        $("#weatherHere").html(`<h5 class="text-center center-block displayBottom"> ${Math.round(response.main.temp*(9/5) -459.67)} &deg F in ${response.name} with ${response.weather[0].description} </h5>`);
+        $("#weatherHere").html(`<h5 class="text-center center-block displayBottom"> ${Math.round(response.main.temp)} &deg F in ${response.name} with ${response.weather[0].description} </h5>`);
         // <img src="http://openweathermap.org/img/w/${response.weather[0].icon}.png">
-        yourCity= response.name;
-        console.log(yourCity);      
     })
 
     var googleMapsApiKey= 'AIzaSyDTQu1tWssDBJYxtf0mIWkm4pXcqwVLfac'
@@ -92,6 +153,22 @@ function showPosition(position) {
     
 }
 
+function showError(error) {
+    switch(error.code) {
+        case error.PERMISSION_DENIED:
+           $("#weatherHere").html(`<div class="center-block text-center errorMessage"><h1>Sorry, we're experiencing a wardrobe malfunction.</h1> User denied the request for Geolocation. Maybe you were just not having it today. Try refreshing or use the location search bar to type in the Zip Code you will be in (or are wishful thinking of), ex: 90038 for Hollywood, CA. </div>`);
+            break;
+        case error.POSITION_UNAVAILABLE:
+            $("#weatherHere").html(`<div class="center-block text-center errorMessage"><h1>Sorry, we're experiencing a wardrobe malfunction.</h1> Location information is unavailable. This link is either outdated, inaccurate, or the server is just not having it today. Try refreshing or use the location search bar to type in the Zip Code you will be in (or are wishful thinking of), ex: 90038 for Hollywood, CA. </div>`);
+            break;
+        case error.TIMEOUT:
+            $("#weatherHere").html(`<div class="center-block text-center errorMessage"><h1>Sorry, we're experiencing a wardrobe malfunction.</h1> The request to get user location timed out. This link is either outdated, inaccurate, or the server is just not having it today. Try refreshing or use the location search bar to type in the Zip Code you will be in (or are wishful thinking of), ex: 90038 for Hollywood, CA. </div>`);
+            break;
+        case error.UNKNOWN_ERROR:
+             $("#weatherHere").html(`<div class="center-block text-center errorMessage"><h1>Sorry, we're experiencing a wardrobe malfunction.</h1> This link is either outdated, inaccurate, or the server is just not having it today. Try refreshing or use the location search bar to type in the Zip Code you will be in (or are wishful thinking of), ex: 90038 for Hollywood, CA. </div>`);
+            break;
+    }
+}
 
 
 function getEvent() {

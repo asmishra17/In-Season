@@ -18,6 +18,7 @@
     <!-- Materialize CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.css" integrity="sha256-3AnlRNIdX11hf3yyjAb12b2Tac0VmZxGxpVRURyJIAw=" crossorigin="anonymous" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Alice" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 
@@ -27,7 +28,7 @@
         <div class="nav-wrapper teal lighten-1 ">
             <a href="#" class="brand-logo">In Season Dashboard</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a class="zipMod" data-toggle="modal" data-target="#zipModal">Enter New Zip</a></li>
+                <li><a data-toggle="modal" data-target="#zipModal"><span class="glyphicon glyphicon-search"></span> Enter New Zip Code</a></li>
                 <li><a href="outfit.html">Skip To Outfit</a></li>
             </ul>
         </div>
@@ -39,17 +40,18 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"> &times;</button>
-                   <p> Need To Dress <em>In Season </em> for Another Location?</p>
+                   <p> <strong> Need To Dress <em>In Season </em> for Another Location?</strong></p>
                 </div>
                 <div class="modal-body">
                     <form class="form-inline">
                     <div class="form-group">
                         <label class="sr-only" for="ZipCode">Zip Code</label><input type="text" class="form-control input-sm" placeholder="Zip Code" id="ZipCode" name="ZipCode">
                         </div>                  
-                        <button type="submit" class="btn btn-info btn-xs">Search</button>
-                        <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Cancel</button>          
+                        <button type="submit" class="btn btn-info btn-xs searchZip">Search</button>
+                        <button type="button" class="btn btn-default btn-xs cancel" data-dismiss="modal">Cancel</button>          
                     </form>
                 </div>
+                <div class="modal-footer"></div>
             </div>
         </div>
     </div>   

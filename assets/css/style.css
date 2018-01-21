@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  font-family: 'Alice', serif;
 }
 .Absolute-Center {
   margin: auto;
@@ -23,6 +24,10 @@
   background-image:url('http://placehold.it/200x30/000000/ffffff/&text=BRAND+LOGO');
 }
 
+.red-text{
+  color:red;
+}
+
 .weather-displays{
   position: absolute;
   top:0;
@@ -33,6 +38,10 @@
   border: 0px solid currentColor;
   margin-top: 10px;
   margin-bottom: 0px;
+}
+
+.errorMessage{
+  font-weight: 700;
 }
 
 .weather-display-row{
