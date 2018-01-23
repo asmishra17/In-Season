@@ -8,10 +8,17 @@ $("#login").on("click", function(){
     console.log($("#password").val());
 })
 
+
 var eventCategory;
 var yourTemp;
+var weatherDescription;
 // Using HTML GEOLOCATION API to grab user location 
 var yourZip;
+
+// $(window).on("load", function(){
+//     localStorage.removeItem("zipcode");
+//     localStorage.removeItem("eventcategory");
+// });
 
 
 
@@ -33,6 +40,8 @@ $(".searchZip").on("click", function(event){
     console.log(newZip);
     console.log(Number.isInteger(Number(newZip)));
     if (newZip.length ===5 && Number.isInteger(Number(newZip)) == true){
+        //clear out any prior zipcodes stored
+        localStorage.removeItem("zipcode");
         console.log(`zip code`);
         yourZip= newZip;
         localStorage.setItem("zipcode", newZip);
@@ -70,7 +79,7 @@ function callOpenWeatherbyZip(zip){
         console.log(response); 
        console.log(response.weather[0].icon.charAt(2));
        var iconLetter =response.weather[0].icon.charAt(2);
-       var weatherDescription = response.weather[0].main;
+       weatherDescription = response.weather[0].main;
        $(".weather-displays").text(`Today's Weather`);
        yourTemp= Math.round(response.main.temp);
        displayOutfit();
@@ -119,7 +128,7 @@ function showPosition(position) {
         console.log(response); 
        console.log(response.weather[0].icon.charAt(2));
        var iconLetter =response.weather[0].icon.charAt(2);
-       var weatherDescription = response.weather[0].main;
+       weatherDescription = response.weather[0].main;
        $(".weather-displays").text(`Today's Weather`);
 
     //    Changing background color of Weather if it is day or night 
@@ -227,6 +236,7 @@ function getEvent() {
             $("#event-list").append(newDiv);
         }
         $("#event").on("click", function(){
+            localStorage.removeItem("eventcategory");
             //get data attr
             eventCategory = $(this).attr("data-event-type");
             console.log(eventCategory);
@@ -236,17 +246,77 @@ function getEvent() {
         })
     })
 }
+// $("#event").on("click", function(){
+//     localStorage.removeItem("eventcategory");
+//     //get data attr
+//     eventCategory = $(this).attr("data-event-type");
+//     console.log(eventCategory);
+//     //store event data 
+//     localStorage.setItem("eventcategory", JSON.stringify(eventCategory));
+//     location.href ="outfit.html";
+// })
 
 //after event has been clicked and user is on outfit page get outfit
 function displayOutfit(){
     var neweventCategory= JSON.parse(localStorage.getItem("eventcategory"));
     console.log(neweventCategory);
     console.log(yourTemp);
-    if (neweventCategory === "concert" && yourTemp < 60){
+    console.log(weatherDescription);
+    if (weatherDescription=== "Rain" || weatherDescription ==="Drizzle" || weatherDescription=== "Thunderstorm"){
+        $("#rainyday").html(`<div class="umbrellaimg"><img height="300" width="300" src="assets/images/Raining.png"><p> It's raining! Don't forget your umbrella!</p></div>`);
+    }
+    if (yourTemp<40){
+        $("#outfit-display").html(`<img height="300" width="300" src="assets/images/CasualCold.jpg"> <div class="cold-decription"> <img height="300" width="300" src="assets/images/ItsCold.png"><p>It's pretty cold out. Stay bundled up if possible!</p></div>`);
+    } else if (yourTemp>=40 && yourTemp<65){
+        $("#outfit-display").html(`<img height="300" width="300" src="assets/images/CasualChilly.jpg">`);
+    } else if (yourTemp>=65){
+        $("#outfit-display").html(`<img height="300" width="300" src="assets/images/CasualWarm.jpg">`);
+    }
+
+    if (neweventCategory === "concert" && yourTemp < 60 && yourTemp>= 40){
         console.log('wear this');
+        $("#outfit-display").html(`<img height="300" width="300" src="assets/images/ConcertCold.jpg">`)
+    } else if (neweventCategory=== "concert" && yourTemp>=60 && yourTemp<= 65){
+        console.log('all you need is a light jacket');
+        $("#outfit-display").html(`<img height="300" width="300" src="assets/images/ConcertChilly.jpg">`)
+    } else if (neweventCategory === "concert" && yourTemp> 65){
+        console.log('go to lolla, because its hot');
+        $("#outfit-display").html(`<img height="300" width="300" src="assets/images/ConcertWarm.jpg">`)
+    } else if (neweventCategory === "concert" && yourTemp<40){
+        console.log('too cold to go out to a concert');
+        $("#outfit-display").html(` <div class="cold-decription"><img height="300" width="300" src="assets/images/ConcertCold.jpg"> <img height="300" width="300" src="assets/images/ItsCold.png"><p>It's pretty cold out. Stay bundled up if possible!</p></div>`);
+    } else if (neweventCategory === "theater" && yourTemp<40){
+        $("#outfit-display").html(`<img height="300" width="300" src="assets/images/TheaterCold.jpg"> <div class="cold-decription"> <img height="300" width="300" src="assets/images/ItsCold.png"><p>It's pretty cold out. Stay bundled up if possible!</p></div>`);
+    } else if (neweventCategory === "theater" && yourTemp>=40 && yourTemp< 60){
+        $("#outfit-display").html(`<img height="300" width="300" src="assets/images/TheaterCold.jpg">`);
+    } else if (neweventCategory ==="theater" && yourTemp>= 60 && yourTemp <= 65){
+        $("#outfit-display").html(`<img height="300" width="300" src="assets/images/TheaterChilly.jpg">`);
+    } else if (neweventCategory === "theater" && yourTemp >65){
+        $("#outfit-display").html(`<img height="300" width="300" src="assets/images/TheaterWarm.jpg">`);
+    } else if (neweventCategory === "sports" && yourTemp <40){
+        $("#outfit-display").html(`
+            <div class="sports">
+             <img height="300" width="300" src="assets/images/SportBasketball.jpg"> 
+             <p>Grab your best sporting gear/sporting jersey and enjoy the game!</p>
+            </div>
+            <div class="cold-decription">
+             <img height="300" width="300" src="assets/images/ItsCold.png">
+             <p>It's pretty cold out. Stay bundled up if possible!</p><
+            /div>`);
+    } else if (neweventCategory ==="sports" && yourTemp>=40){
+        $("#outfit-display").html(`
+        <div class="sports">
+            <img height="300" width="300" src="assets/images/SportBasketball.jpg"> 
+            <p>Grab your best sporting gear/sporting jersey and enjoy the game!</p>
+       </div>`);
     }
     
 }
+
+$("#skipPage").on("click", function(){
+    //display casual outfits given weather
+    localStorage.removeItem("eventdescription");
+})
 
 
 
