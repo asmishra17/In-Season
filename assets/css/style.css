@@ -28,6 +28,11 @@
   color:red;
 }
 
+#travel-options{
+	width: 50%;
+	max-width:700px;
+}
+
 .weather-displays{
   position: absolute;
   top:0;
