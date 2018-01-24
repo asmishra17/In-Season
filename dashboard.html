@@ -29,7 +29,7 @@
             <a href="#" class="brand-logo">In Season Dashboard</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a data-toggle="modal" data-target="#zipModal"><span class="glyphicon glyphicon-search"></span> Enter New Zip Code</a></li>
-                <li><a href="outfit.html">Skip To Outfit</a></li>
+                <li><a id="skipPage" href="outfit.html">Skip To Outfit</a></li>
             </ul>
         </div>
     </nav>
@@ -83,16 +83,26 @@
     <div id="travel-options">
         <div class="container">
             <blockquote>
-                <h3 class="teal-text teal-accent-4">Your event</h3>
+                <h4 class="teal-text teal-accent-4 text-center">Have An Event You Need To Look Stylish and <em>In Season</em> for?</h4>
             </blockquote>
             <form class="input group" class="input-field" id="event-planner">
-                <label for="origin">Your City</label>
-                <input id="origin" type="text" class="form-control teal-text text-darken-3" placeholder="Enter City Name">
-                <label for="destination">Indoor or Outdoor?</label>
-                <input id="destination" type="text" class="form-control teal-text text-darken-3" placeholder="Enter Event Type">
+                <label for="destination">Tell Us About Your Event</label>
+                <div class="form-group">
+                        <label for="EventType">What Type of Event Are You Going To?</label>
+                        <select class="form-control" id="eventTypes">
+                          <option value="Classy">Classy</option>
+                          <option value="Casual">Casual</option>
+                          <option value="Outdoor">Outdoor</option>
+                          <option value="Sport">Sport</option>
+                          <option value="Theater">Theater</option>
+                          <option value="Concert">Concert</option>
+                          <option value="Business Casual">Business Casual</option>
+                          <option value="Vacation Beach">Vacation Beach</option>
+                        </select>
+              </div>
             </form>
-            <button class="btn waves-effect waves-light" id="search-travel-info" type="submit" name="action">Find an event!
-  </button>
+            <button class="btn waves-effect waves-light" id="search-travel-info" type="submit" name="action">Dress Me!
+            </button>
             <div class="progress">
                 <div class="indeterminate"></div>
             </div>

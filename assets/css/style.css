@@ -20,7 +20,15 @@
     padding: 40px;
 }
 
+.btn{
+	margin-top: 10px;
+}
+img{
+	margin: auto 10px auto 10px;
+}
+
 #logo-container {
+  
     margin: auto;
     margin-bottom: 10px;
     width: 200px;
@@ -32,10 +40,15 @@
     color: red;
 }
 
-.weather-displays {
-    position: absolute;
-    top: 0;
-    left: 23em;
+#travel-options{
+	width: 50%;
+	max-width:700px;
+}
+
+.weather-displays{
+  position: absolute;
+  top:0;
+  left:23em;
 }
 
 #weatherHere {
