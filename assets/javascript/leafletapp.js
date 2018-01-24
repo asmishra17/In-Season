@@ -42,8 +42,6 @@ $.ajax({
 
 })
 
-getLocation();
-
 function getEvent() {
     var object = $(this).attr('data-name');
 
@@ -67,14 +65,6 @@ function getEvent() {
         console.log(SeatGeekqueryURL);
         console.log(response);
         
-
-
-        $("#event-info").empty();
-        for (var i=0; i < response.events.length;i++ ) {
-            var newDiv = $("<div>");
-            newDiv.html(response.events[i].short_title);
-            $("#event-info").append(newDiv);
-        } 
             //locationLat = response.events[i].venue.location.lat;
             //locationLon = response.events[i].venue.location.lon;
 
