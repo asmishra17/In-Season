@@ -42,21 +42,21 @@ database.ref("users/" + localStorage.getItem("userid"));
 
 //put this in button below 
 var id = localStorage.getItem("userid");
-
+    //may have to remove this 
 //city name/eventType save to database
-$("#search-travel-info").on("click", function() {
-    var id = localStorage.getItem("userid");
-    userCity = $("#origin").val().trim();
-    console.log(userCity);
-    if (userCity !="") {
-        var city = database.ref("/users/" + id).push({
-            userCity: userCity
-        });
-        console.log(userCity);
-        localStorage.setItem("userCity", city);
-    }    
+// $("#search-travel-info").on("click", function() {
+//     var id = localStorage.getItem("userid");
+//     userCity = $("#origin").val().trim();
+//     console.log(userCity);
+//     if (userCity !="") {
+//         var city = database.ref("/users/" + id).push({
+//             userCity: userCity
+//         });
+//         console.log(userCity);
+//         localStorage.setItem("userCity", city);
+//     }    
 
-});
+// });
 
 // extra zip code saved 
 $(".searchZip").on("click", function() {
@@ -73,8 +73,27 @@ $(".searchZip").on("click", function() {
 });
 
 //save event type that they chose 
+//there's a drop down 
+//and then a click button 
+$("#search-travel-info").on("click", function() {
+    var id = localStorage.getItem("userid");        
+    var eventType = $("#eventTypes option:selected").val();
+    console.log(eventType);
+    var eventType = database.ref("/users" + id).push({
+        eventType: eventType
+    });
+    console.log(eventType);
+    localStorage.setItem("eventType", eventType);
+
+});
+
 
 //save the event they clicked on 
+
+//ooh and then bitmoji 
+
+
+//ooh and then thing they clicked on?
 
 
 
