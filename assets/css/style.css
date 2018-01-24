@@ -29,12 +29,14 @@ img {
     margin: auto 10px auto 10px;
 }
 
-#logo-container.is-Responsive {
-    margin: center;
+#logo-container {
+    margin: 0 auto;
+    float: left;
     margin-bottom: 20px;
     width: 500px;
     height: 146px;
-    background-image: url('../images/logo .png')
+    background-image: url(../images/logo.jpg);
+    clear: both;
 }
 
 .red-text {
