@@ -58,6 +58,26 @@ $("#search-travel-info").on("click", function() {
 
 });
 
+// extra zip code saved 
+$(".searchZip").on("click", function() {
+    var id = localStorage.getItem("userid");    
+    var newZip = $("#ZipCode").val().trim();
+    console.log(newZip);
+    if (newZip !="") {
+        var newZip = database.ref("/users/" + id).push({
+            newZip: newZip
+        });
+        console.log(newZip);
+        localStorage.setItem("newZip", newZip);
+    }
+});
+
+//save event type that they chose 
+
+//save the event they clicked on 
+
+
+
 
 
     
