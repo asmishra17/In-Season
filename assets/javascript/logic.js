@@ -43,20 +43,61 @@ database.ref("users/" + localStorage.getItem("userid"));
 //put this in button below 
 var id = localStorage.getItem("userid");
 
+    //may have to remove this  as userCity does not exist - can just use newZip I think
 //city name/eventType save to database
-$("#search-travel-info").on("click", function() {
-    var id = localStorage.getItem("userid");
-    userCity = $("#origin").val().trim();
-    console.log(userCity);
-    if (userCity !="") {
-        var city = database.ref("/users/" + id).push({
-            userCity: userCity
+// $("#search-travel-info").on("click", function() {
+//     var id = localStorage.getItem("userid");
+//     userCity = $("#origin").val().trim();
+//     console.log(userCity);
+//     if (userCity !="") {
+//         var city = database.ref("/users/" + id).push({
+//             userCity: userCity
+//         });
+//         console.log(userCity);
+//         localStorage.setItem("userCity", city);
+//     }    
+
+// });
+
+// new zip code saved  to database
+$(".searchZip").on("click", function() {
+    var id = localStorage.getItem("userid");    
+    var newZip = $("#ZipCode").val().trim();
+    console.log(newZip);
+    if (newZip !="") {
+        var newZip = database.ref("/users/" + id).push({
+            newZip: newZip
         });
-        console.log(userCity);
-        localStorage.setItem("userCity", city);
-    }    
+        console.log(newZip);
+        localStorage.setItem("newZip", newZip);
+    }
+});
+
+//save event type that they chose  -there's
+$("#search-travel-info").on("click", function() {
+    var id = localStorage.getItem("userid");        
+    var eventType = $("#eventTypes option:selected").val();
+    console.log(eventType);
+    var eventType = database.ref("/users/" + id).push({
+        eventType: eventType
+    });
+    console.log(eventType);
+    localStorage.setItem("eventType", eventType);
 
 });
+
+//save the event they clicked on (just grabbing the text of it)
+//there is a var called title in geolocation.js
+
+// $("li :active").on("click", function() {
+//     var id = localStorage.getItem("userid");        
+//     var eventText = $("h5 a").val();
+//     console.log(EventText);  
+// });
+
+
+
+
 
 
 
