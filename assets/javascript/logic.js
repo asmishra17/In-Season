@@ -42,7 +42,8 @@ database.ref("users/" + localStorage.getItem("userid"));
 
 //put this in button below 
 var id = localStorage.getItem("userid");
-    //may have to remove this  as uesrCity does not exist - can just use newZip I think
+
+    //may have to remove this  as userCity does not exist - can just use newZip I think
 //city name/eventType save to database
 // $("#search-travel-info").on("click", function() {
 //     var id = localStorage.getItem("userid");
@@ -58,10 +59,7 @@ var id = localStorage.getItem("userid");
 
 // });
 
-
-//get current Zip code - from geolocation.js
-
-// extra zip code saved 
+// new zip code saved  to database
 $(".searchZip").on("click", function() {
     var id = localStorage.getItem("userid");    
     var newZip = $("#ZipCode").val().trim();
@@ -75,7 +73,7 @@ $(".searchZip").on("click", function() {
     }
 });
 
-//save event type that they chose 
+//save event type that they chose  -there's
 $("#search-travel-info").on("click", function() {
     var id = localStorage.getItem("userid");        
     var eventType = $("#eventTypes option:selected").val();
@@ -88,18 +86,16 @@ $("#search-travel-info").on("click", function() {
 
 });
 
+//save the event they clicked on (just grabbing the text of it)
+//there is a var called title in geolocation.js
+
+$("li :active").on("click", function() {
+    var id = localStorage.getItem("userid");        
+    var eventText = $("h5 a").val();
+    console.log(EventText);  
+});
 
 
-
-//save the event they clicked on (just grabbing the text)
-
-
-
-
-//ooh and then bitmoji 
-
-
-//ooh and then thing they clicked on?
 
 
 
