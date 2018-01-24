@@ -111,7 +111,7 @@ function getEvent() {
             marker9.bindPopup(`<b>${response.events[9].title}</b><br>${response.events[9].venue.name}`).openPopup();
 
             var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(mymap);
-            marker.bindPopup("<b>Hello!</b><br>You are here.").openPopup();
+            marker.bindPopup("<b>Hello!</b><br>You are here").openPopup();
 
     })
 }
