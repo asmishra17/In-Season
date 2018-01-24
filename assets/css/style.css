@@ -1,7 +1,6 @@
 * {
     box-sizing: border-box;
     font-family: 'Alice', serif;
-    color: teal
 }
 
 .Absolute-Center {
@@ -29,13 +28,12 @@ img{
 }
 
 #logo-container {
-    float: right;
-    margin: center;
-    margin-bottom: 20px;
-    width: 500px;
-    height: 146px;
-    background-image: url('https://gm1.ggpht.com/K8V2c1EmKFHyAr1CzxjSHTf-HQN8wN1yHVlOusd1etZL-GaIAQ-RBjDfoXaPGRSOhcwNfVhJ04S7f7h1P3tXbUXneLmfCHbsRWTC9c1Q_ooBWicWsJmmJ8xdqx6Vkpp1T1UxpszyIpkhpOdzWWp45RziDyHdwurY9v4EtJiEV0BltOzigWRi12cI4OxzMStY8FGbt5QXylUUgbbQqcGxl0VAsStnvdxPickj0_29-TvSRiDWXONG9O4cnLGP2ymATdBekz44rymv8Sz9kcD-cx2QV6goKwm8UajHAJ2vMXYBrK4f8Rql-IxITSPHXpt29GcrJ7p1NyTm4q5kWOF763hU0J-XY77MyWXoZASnV-LozsRTEt-FolOmJ9L0b0nA6T4AUXwzKE9Y3jGu5T18VumHV5ldWRtv__9KMhpsJOGpFPUE3xUuvR_9t7iyzwGynxoRZO5nNnODlkkPUb20enuWO5YOswCHVOVKBXLq4EaTx0vTb0eL4kfekeAvOLu3pRRy6pak6rIZ0wJtHEpF0aSG3SHNqjTdY4V0PpTi5BIANxhkt6FHw4Exkr2BZ5o_hx3dEHnKioSaRuphUtJntZ8IixboR9duRhJkLr6EGhBAuYi9e16RhT4HI2RKZGTgjV2Ffm7iZtoORUB0uicoYcvVghttZHVigvpeiK0kI_Vy2ek_eiKeUQn1SoX-kK4=w1008-h292-l75-ft');
-
+  
+    margin: auto;
+    margin-bottom: 10px;
+    width: 200px;
+    height: 30px;
+    background-image: url('assets/images/logo.png');
 }
 
 .red-text {
@@ -55,7 +53,7 @@ img{
 
 #weatherHere {
     border: 0px solid currentColor;
-    margin-top: 0px;
+    margin-top: 10px;
     margin-bottom: 0px;
 }
 
