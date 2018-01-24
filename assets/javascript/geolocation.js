@@ -228,51 +228,48 @@ function getEvent() {
             var eventType= response.events[i].taxonomies[0].name;
             console.log(eventType);
             var newDiv = $('<li>');
-            var titleDiv = $(`<a id="event" data-event-type="${eventType}" target="_blank" href="${url}"><h5>${title}</h5></a>`);
+            var titleDiv = $(`<a id="event" data-event="${eventType}" target="_blank" href="${url}"><h5>${title}</h5></a>`);
             var dateDiv = $('<h5>' + date + '</h5>');
             newDiv.append(titleDiv);
             newDiv.append(dateDiv)
                 //newDiv.html(response.events[i].short_title);
             $("#event-list").append(newDiv);
         }
-        $("#event").on("click", function(){
+        $(document).on("click", "#event", function(){
             localStorage.removeItem("eventcategory");
             //get data attr
-            eventCategory = $(this).attr("data-event-type");
+            eventCategory = $(this).attr("data-event");
+            console.log("hello");
             console.log(eventCategory);
             //store event data 
-            localStorage.setItem("eventcategory", JSON.stringify(eventCategory));
+            localStorage.setItem("eventcategory", eventCategory);
             location.href ="outfit.html";
         })
     })
 }
-// $("#event").on("click", function(){
-//     localStorage.removeItem("eventcategory");
-//     //get data attr
-//     eventCategory = $(this).attr("data-event-type");
-//     console.log(eventCategory);
-//     //store event data 
-//     localStorage.setItem("eventcategory", JSON.stringify(eventCategory));
-//     location.href ="outfit.html";
-// })
+
+function grabStoredItem(){
+    var storedItem = localStorage.getItem("eventcategory");
+    if (typeof storedItem == "string") {
+        return storedItem;
+    } else if (storedItem && storedItem.eventcategory){
+        return JSON.parse(storedItem);
+    }
+}
 
 //after event has been clicked and user is on outfit page get outfit
 function displayOutfit(){
-    var neweventCategory= JSON.parse(localStorage.getItem("eventcategory"));
+    var neweventCategory= grabStoredItem();
+    if (neweventCategory == null || neweventCategory == undefined){
+        neweventCategory = "concert";
+    }
     console.log(neweventCategory);
     console.log(yourTemp);
     console.log(weatherDescription);
     if (weatherDescription=== "Rain" || weatherDescription ==="Drizzle" || weatherDescription=== "Thunderstorm"){
         $("#rainyday").html(`<div class="umbrellaimg"><img height="300" width="300" src="assets/images/Raining.png"><p> It's raining! Don't forget your umbrella!</p></div>`);
     }
-    if (yourTemp<40){
-        $("#outfit-display").html(`<img height="300" width="300" src="assets/images/CasualCold.jpg"> <div class="cold-decription"> <img height="300" width="300" src="assets/images/ItsCold.png"><p>It's pretty cold out. Stay bundled up if possible!</p></div>`);
-    } else if (yourTemp>=40 && yourTemp<65){
-        $("#outfit-display").html(`<img height="300" width="300" src="assets/images/CasualChilly.jpg">`);
-    } else if (yourTemp>=65){
-        $("#outfit-display").html(`<img height="300" width="300" src="assets/images/CasualWarm.jpg">`);
-    }
-
+  
     if (neweventCategory === "concert" && yourTemp < 60 && yourTemp>= 40){
         console.log('wear this');
         $("#outfit-display").html(`<img height="300" width="300" src="assets/images/ConcertCold.jpg">`)
@@ -309,13 +306,29 @@ function displayOutfit(){
             <img height="300" width="300" src="assets/images/SportBasketball.jpg"> 
             <p>Grab your best sporting gear/sporting jersey and enjoy the game!</p>
        </div>`);
+    } else  if (yourTemp<40 && neweventCategory =="casual"){
+        $("#outfit-display").html(`<img height="300" width="300" src="assets/images/CasualCold.jpg"> <div class="cold-decription"> <img height="300" width="300" src="assets/images/ItsCold.png"><p>It's pretty cold out. Stay bundled up if possible!</p></div>`);
+    } else if (yourTemp>=40 && yourTemp<65 && neweventCategory =="casual"){
+        $("#outfit-display").html(`<img height="300" width="300" src="assets/images/CasualChilly.jpg">`);
+    } else if (yourTemp>=65 && neweventCategory =="casual"){
+        $("#outfit-display").html(`<img height="300" width="300" src="assets/images/CasualWarm.jpg">`);
     }
+
     
 }
 
 $("#skipPage").on("click", function(){
     //display casual outfits given weather
-    localStorage.removeItem("eventdescription");
+    localStorage.removeItem("eventcategory");
+    localStorage.setItem("eventcategory", "casual");
+})
+
+$("#search-travel-info").on("click", function(){
+    localStorage.removeItem("eventcategory");
+    var eventValue = $("#eventTypes").val();
+    localStorage.setItem("eventcategory", eventValue);
+    location.href ="outfit.html";
+    displayOutfit();
 })
 
 
