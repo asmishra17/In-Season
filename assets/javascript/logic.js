@@ -89,11 +89,11 @@ $("#search-travel-info").on("click", function() {
 //save the event they clicked on (just grabbing the text of it)
 //there is a var called title in geolocation.js
 
-$("li :active").on("click", function() {
-    var id = localStorage.getItem("userid");        
-    var eventText = $("h5 a").val();
-    console.log(EventText);  
-});
+// $("li :active").on("click", function() {
+//     var id = localStorage.getItem("userid");        
+//     var eventText = $("h5 a").val();
+//     console.log(EventText);  
+// });
 
 
 
