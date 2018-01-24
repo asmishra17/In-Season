@@ -6,25 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Your Outfit</title>
-      <!-- Animate.css CDN -->
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-      <!-- jQuery CDN -->
-      <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
-       <!--Bootstrap--> 
+    <!-- Animate.css CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
+    <!--Bootstrap-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-      <!-- Compiled and minified CSS -->
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
-      <!-- Compiled and minified JavaScript -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
-      <!-- Materialize CDN -->
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.css" integrity="sha256-3AnlRNIdX11hf3yyjAb12b2Tac0VmZxGxpVRURyJIAw=" crossorigin="anonymous" />
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <link href="https://fonts.googleapis.com/css?family=Alice" rel="stylesheet">
-      <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+    <!-- Materialize CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.css" integrity="sha256-3AnlRNIdX11hf3yyjAb12b2Tac0VmZxGxpVRURyJIAw=" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Alice" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
+
 <body>
-   <!-- Navbar -->
+    <!-- Navbar -->
     <nav class="fixed-nav-bar">
         <div class="nav-wrapper teal lighten-1 ">
             <a href="#" class="brand-logo">In Season Dashboard</a>
@@ -41,33 +42,33 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"> &times;</button>
-                   <p> Need To Dress <em>In Season </em> for Another Location?</p>
+                    <p> Need To Dress <em>In Season </em> for Another Location?</p>
                 </div>
                 <div class="modal-body">
                     <form class="form-inline">
-                    <div class="form-group">
-                        <label class="sr-only" for="ZipCode">Zip Code</label><input type="text" class="form-control input-sm" placeholder="Zip Code" id="ZipCode" name="ZipCode">
-                        </div>                  
+                        <div class="form-group">
+                            <label class="sr-only" for="ZipCode">Zip Code</label><input type="text" class="form-control input-sm" placeholder="Zip Code" id="ZipCode" name="ZipCode">
+                        </div>
                         <button type="submit" class="btn btn-info btn-xs">Search</button>
-                        <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Cancel</button>          
+                        <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Cancel</button>
                     </form>
                 </div>
             </div>
         </div>
-    </div>   
-  <!-- Weather -->
-  <div class="parallax-container valign-wrapper weather-container">
+    </div>
+    <!-- Weather -->
+    <div class="parallax-container valign-wrapper weather-container">
         <!-- <h1 class="blue-text text-lighten-5 valign center-block">Your Weather!</h1> -->
         <h5 class="weather-displays"></h5>
         <div class="row">
             <div class="weather-icons"> </div>
-         </div>
+        </div>
 
-         <div class="row weather-display-row center-block text-center">
+        <div class="row weather-display-row center-block text-center">
             <div class="parallax"><img src="https://static.pexels.com/photos/125510/pexels-photo-125510.jpeg"></div>
             <div id="weatherHere"></div>
         </div>
-    </div>    
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center center-block">
@@ -82,35 +83,25 @@
         <div class="row">
             <div class="col-md-12 text-center center-block" id="rainyday"></div>
         </div>
-     </div>
-   
-  <!-- Footer -->
+    </div>
+
+    <!-- Footer -->
     <footer class="page-footer teal lighten-4">
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">
-                    <h5 class="white-text">Footer Content</h5>
-                    <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-                </div>
-                <div class="col l4 offset-l2 s12">
-                    <h5 class="white-text">Links</h5>
-                    <ul>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
-                    </ul>
+
                 </div>
             </div>
         </div>
         <div class="footer-copyright">
             <div class="container">
-                © 2018 Copyright Text
-                <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+                © 2018 In Season
+
             </div>
         </div>
     </footer>
-    <script src="assets/javascript/geolocation.js"></script>  
+    <script src="assets/javascript/geolocation.js"></script>
 </body>
 
 </html>
