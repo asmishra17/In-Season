@@ -9,9 +9,26 @@ $("#login").on("click", function(){
 })
 
 
-
+var eventCategory;
+var yourTemp;
+var weatherDescription;
 // Using HTML GEOLOCATION API to grab user location 
 var yourZip;
+
+// $(window).on("load", function(){
+//     localStorage.removeItem("zipcode");
+//     localStorage.removeItem("eventcategory");
+// });
+
+
+
+function storeZip(){
+    localStorage.setItem("zipcode", yourZip);
+}
+yourZip= localStorage.getItem("zipcode");
+callOpenWeatherbyZip(yourZip);
+getEvent();
+
 
 if(yourZip ==null){
     getLocation();
@@ -23,8 +40,12 @@ $(".searchZip").on("click", function(event){
     console.log(newZip);
     console.log(Number.isInteger(Number(newZip)));
     if (newZip.length ===5 && Number.isInteger(Number(newZip)) == true){
+        //clear out any prior zipcodes stored
+        localStorage.removeItem("zipcode");
         console.log(`zip code`);
         yourZip= newZip;
+        localStorage.setItem("zipcode", newZip);
+        localStorage.getItem("zipcode");
         getEvent();
         callOpenWeatherbyZip(yourZip);
         $('.cancel').click();
@@ -58,8 +79,10 @@ function callOpenWeatherbyZip(zip){
         console.log(response); 
        console.log(response.weather[0].icon.charAt(2));
        var iconLetter =response.weather[0].icon.charAt(2);
-       var weatherDescription = response.weather[0].main;
+       weatherDescription = response.weather[0].main;
        $(".weather-displays").text(`Today's Weather`);
+       yourTemp= Math.round(response.main.temp);
+       displayOutfit();
 
     //    Changing background color of Weather if it is day or night 
        if (iconLetter === "d") {
@@ -70,21 +93,21 @@ function callOpenWeatherbyZip(zip){
            $(".weather-container").addClass("nightWeather");
        }
     // changing Weather Icon given conditions
-    if (weatherDescription === "Clear" && iconLetter === "d") {
-        $(".weather-icons").html(`<div class="sunny col-md-6"></div>`);
-    } else if (weatherDescription === "Clouds" || weatherDescription === "Mist" || weatherDescription === "Fog"){
-        $(".weather-icons").html(`<div class="cloudy col-md-6"></div>`);
-    } else if (weatherDescription === "Rain" || weatherDescription === "Drizzle"){
-        $(".weather-icons").html(`<div class="rainy col-md-6"></div>`);
-    } else if (weatherDescription === "Snow"){
-        $(".weather-icons").html(`<div class="snowy col-md-6"></div>`);
-    } else if (weatherDescription === "Clear" || iconLetter === "n") {
-        $(".weather-icons").html(`<div class="starry col-md-6"></div>`);
-    } else if (weatherDescription === "Thunderstorm"){
-        $(".weather-icons").html(`<div class="stormy col-md-6"></div>`);
-    }
-    
-        $("#weatherHere").html(`<h5 class="text-center center-block displayBottom"> ${Math.round(response.main.temp)} &deg F in ${response.name} with ${response.weather[0].description} </h5>`);
+        if (weatherDescription === "Clear" && iconLetter === "d") {
+            $(".weather-icons").html(`<div class="sunny col-md-6"></div>`);
+        } else if (weatherDescription === "Clouds" || weatherDescription === "Mist" || weatherDescription === "Fog"){
+            $(".weather-icons").html(`<div class="cloudy col-md-6"></div>`);
+        } else if (weatherDescription === "Rain" || weatherDescription === "Drizzle"){
+            $(".weather-icons").html(`<div class="rainy col-md-6"></div>`);
+        } else if (weatherDescription === "Snow"){
+            $(".weather-icons").html(`<div class="snowy col-md-6"></div>`);
+        } else if (weatherDescription === "Clear" || iconLetter === "n") {
+            $(".weather-icons").html(`<div class="starry col-md-6"></div>`);
+        } else if (weatherDescription === "Thunderstorm"){
+            $(".weather-icons").html(`<div class="stormy col-md-6"></div>`);
+        }
+        
+        $("#weatherHere").html(`<h5 class="text-center center-block displayBottom"> ${yourTemp} &deg F in ${response.name} with ${response.weather[0].description} </h5>`);
 
     });
 }
@@ -105,7 +128,7 @@ function showPosition(position) {
         console.log(response); 
        console.log(response.weather[0].icon.charAt(2));
        var iconLetter =response.weather[0].icon.charAt(2);
-       var weatherDescription = response.weather[0].main;
+       weatherDescription = response.weather[0].main;
        $(".weather-displays").text(`Today's Weather`);
 
     //    Changing background color of Weather if it is day or night 
@@ -117,21 +140,23 @@ function showPosition(position) {
            $(".weather-container").addClass("nightWeather");
        }
     // changing Weather Icon given conditions
-    if (weatherDescription === "Clear" && iconLetter === "d") {
-        $(".weather-icons").html(`<div class="sunny col-md-6"></div>`);
-    } else if (weatherDescription === "Clouds" || weatherDescription === "Mist" || weatherDescription === "Fog"){
-        $(".weather-icons").html(`<div class="cloudy col-md-6"></div>`);
-    } else if (weatherDescription === "Rain" || weatherDescription === "Drizzle"){
-        $(".weather-icons").html(`<div class="rainy col-md-6"></div>`);
-    } else if (weatherDescription === "Snow"){
-        $(".weather-icons").html(`<div class="snowy col-md-6"></div>`);
-    } else if (weatherDescription === "Clear" || iconLetter === "n") {
-        $(".weather-icons").html(`<div class="starry col-md-6"></div>`);
-    } else if (weatherDescription === "Thunderstorm"){
-        $(".weather-icons").html(`<div class="stormy col-md-6"></div>`);
-    }
-    
-        $("#weatherHere").html(`<h5 class="text-center center-block displayBottom"> ${Math.round(response.main.temp)} &deg F in ${response.name} with ${response.weather[0].description} </h5>`);
+        if (weatherDescription === "Clear" && iconLetter === "d") {
+            $(".weather-icons").html(`<div class="sunny col-md-6"></div>`);
+        } else if (weatherDescription === "Clouds" || weatherDescription === "Mist" || weatherDescription === "Fog"){
+            $(".weather-icons").html(`<div class="cloudy col-md-6"></div>`);
+        } else if (weatherDescription === "Rain" || weatherDescription === "Drizzle"){
+            $(".weather-icons").html(`<div class="rainy col-md-6"></div>`);
+        } else if (weatherDescription === "Snow"){
+            $(".weather-icons").html(`<div class="snowy col-md-6"></div>`);
+        } else if (weatherDescription === "Clear" || iconLetter === "n") {
+            $(".weather-icons").html(`<div class="starry col-md-6"></div>`);
+        } else if (weatherDescription === "Thunderstorm"){
+            $(".weather-icons").html(`<div class="stormy col-md-6"></div>`);
+        }
+        
+        yourTemp=Math.round(response.main.temp);
+        displayOutfit();
+        $("#weatherHere").html(`<h5 class="text-center center-block displayBottom"> ${yourTemp} &deg F in ${response.name} with ${response.weather[0].description} </h5>`);
         // <img src="http://openweathermap.org/img/w/${response.weather[0].icon}.png">
     })
 
@@ -147,6 +172,7 @@ function showPosition(position) {
     .done(function(response){
         console.log(response.results[0].address_components[7].long_name);
         yourZip= response.results[0].address_components[7].long_name;
+        storeZip();
         getEvent();
     })
 
@@ -199,18 +225,100 @@ function getEvent() {
             var title = response.events[i].short_title;
             var date = response.events[i].datetime_local.split("T")[0];
             var url = response.events[i].url;
+            var eventType= response.events[i].taxonomies[0].name;
+            console.log(eventType);
             var newDiv = $('<li>');
-            var titleDiv = $('<a target="_blank" href="' + url + '"><h5>' + title + '</h5></a>');
+            var titleDiv = $(`<a id="event" data-event-type="${eventType}" target="_blank" href="${url}"><h5>${title}</h5></a>`);
             var dateDiv = $('<h5>' + date + '</h5>');
             newDiv.append(titleDiv);
             newDiv.append(dateDiv)
                 //newDiv.html(response.events[i].short_title);
             $("#event-list").append(newDiv);
-
-
         }
+        $("#event").on("click", function(){
+            localStorage.removeItem("eventcategory");
+            //get data attr
+            eventCategory = $(this).attr("data-event-type");
+            console.log(eventCategory);
+            //store event data 
+            localStorage.setItem("eventcategory", JSON.stringify(eventCategory));
+            location.href ="outfit.html";
+        })
     })
 }
+// $("#event").on("click", function(){
+//     localStorage.removeItem("eventcategory");
+//     //get data attr
+//     eventCategory = $(this).attr("data-event-type");
+//     console.log(eventCategory);
+//     //store event data 
+//     localStorage.setItem("eventcategory", JSON.stringify(eventCategory));
+//     location.href ="outfit.html";
+// })
+
+//after event has been clicked and user is on outfit page get outfit
+function displayOutfit(){
+    var neweventCategory= JSON.parse(localStorage.getItem("eventcategory"));
+    console.log(neweventCategory);
+    console.log(yourTemp);
+    console.log(weatherDescription);
+    if (weatherDescription=== "Rain" || weatherDescription ==="Drizzle" || weatherDescription=== "Thunderstorm"){
+        $("#rainyday").html(`<div class="umbrellaimg"><img height="300" width="300" src="assets/images/Raining.png"><p> It's raining! Don't forget your umbrella!</p></div>`);
+    }
+    if (yourTemp<40){
+        $("#outfit-display").html(`<img height="300" width="300" src="assets/images/CasualCold.jpg"> <div class="cold-decription"> <img height="300" width="300" src="assets/images/ItsCold.png"><p>It's pretty cold out. Stay bundled up if possible!</p></div>`);
+    } else if (yourTemp>=40 && yourTemp<65){
+        $("#outfit-display").html(`<img height="300" width="300" src="assets/images/CasualChilly.jpg">`);
+    } else if (yourTemp>=65){
+        $("#outfit-display").html(`<img height="300" width="300" src="assets/images/CasualWarm.jpg">`);
+    }
+
+    if (neweventCategory === "concert" && yourTemp < 60 && yourTemp>= 40){
+        console.log('wear this');
+        $("#outfit-display").html(`<img height="300" width="300" src="assets/images/ConcertCold.jpg">`)
+    } else if (neweventCategory=== "concert" && yourTemp>=60 && yourTemp<= 65){
+        console.log('all you need is a light jacket');
+        $("#outfit-display").html(`<img height="300" width="300" src="assets/images/ConcertChilly.jpg">`)
+    } else if (neweventCategory === "concert" && yourTemp> 65){
+        console.log('go to lolla, because its hot');
+        $("#outfit-display").html(`<img height="300" width="300" src="assets/images/ConcertWarm.jpg">`)
+    } else if (neweventCategory === "concert" && yourTemp<40){
+        console.log('too cold to go out to a concert');
+        $("#outfit-display").html(` <div class="cold-decription"><img height="300" width="300" src="assets/images/ConcertCold.jpg"> <img height="300" width="300" src="assets/images/ItsCold.png"><p>It's pretty cold out. Stay bundled up if possible!</p></div>`);
+    } else if (neweventCategory === "theater" && yourTemp<40){
+        $("#outfit-display").html(`<img height="300" width="300" src="assets/images/TheaterCold.jpg"> <div class="cold-decription"> <img height="300" width="300" src="assets/images/ItsCold.png"><p>It's pretty cold out. Stay bundled up if possible!</p></div>`);
+    } else if (neweventCategory === "theater" && yourTemp>=40 && yourTemp< 60){
+        $("#outfit-display").html(`<img height="300" width="300" src="assets/images/TheaterCold.jpg">`);
+    } else if (neweventCategory ==="theater" && yourTemp>= 60 && yourTemp <= 65){
+        $("#outfit-display").html(`<img height="300" width="300" src="assets/images/TheaterChilly.jpg">`);
+    } else if (neweventCategory === "theater" && yourTemp >65){
+        $("#outfit-display").html(`<img height="300" width="300" src="assets/images/TheaterWarm.jpg">`);
+    } else if (neweventCategory === "sports" && yourTemp <40){
+        $("#outfit-display").html(`
+            <div class="sports">
+             <img height="300" width="300" src="assets/images/SportBasketball.jpg"> 
+             <p>Grab your best sporting gear/sporting jersey and enjoy the game!</p>
+            </div>
+            <div class="cold-decription">
+             <img height="300" width="300" src="assets/images/ItsCold.png">
+             <p>It's pretty cold out. Stay bundled up if possible!</p><
+            /div>`);
+    } else if (neweventCategory ==="sports" && yourTemp>=40){
+        $("#outfit-display").html(`
+        <div class="sports">
+            <img height="300" width="300" src="assets/images/SportBasketball.jpg"> 
+            <p>Grab your best sporting gear/sporting jersey and enjoy the game!</p>
+       </div>`);
+    }
+    
+}
+
+$("#skipPage").on("click", function(){
+    //display casual outfits given weather
+    localStorage.removeItem("eventdescription");
+})
+
+
 
 
 
