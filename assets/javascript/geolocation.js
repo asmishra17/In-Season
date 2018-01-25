@@ -51,9 +51,9 @@ $(".searchZip").on("click", function(event){
         $('.cancel').click();
     } else{ 
         console.log(`not a zip code`);
-        $(".modal-footer").html(`<p class="red-text text-center">Not a Valid Zip Code</p>`);
+        $(".errormsg").html(`<p class="red-text text-center">Not a Valid Zip Code</p>`);
         setTimeout(function(){
-            $(".modal-footer").empty();
+            $(".errormsg").empty();
         }, 3000);
     }
 })
@@ -95,7 +95,7 @@ function callOpenWeatherbyZip(zip){
     // changing Weather Icon given conditions
         if (weatherDescription === "Clear" && iconLetter === "d") {
             $(".weather-icons").html(`<div class="sunny col-md-6"></div>`);
-        } else if (weatherDescription === "Clouds" || weatherDescription === "Mist" || weatherDescription === "Fog"){
+        } else if (weatherDescription === "Clouds" || weatherDescription === "Mist" || weatherDescription === "Fog" || weatherDescription === "Haze"){
             $(".weather-icons").html(`<div class="cloudy col-md-6"></div>`);
         } else if (weatherDescription === "Rain" || weatherDescription === "Drizzle"){
             $(".weather-icons").html(`<div class="rainy col-md-6"></div>`);
@@ -298,8 +298,8 @@ function displayOutfit(){
             </div>
             <div class="cold-decription">
              <img height="300" width="300" src="assets/images/ItsCold.png">
-             <p>It's pretty cold out. Stay bundled up if possible!</p><
-            /div>`);
+             <p>It's pretty cold out. Stay bundled up if possible!</p>
+             </div>`);
     } else if (neweventCategory ==="sports" && yourTemp>=40){
         $("#outfit-display").html(`
         <div class="sports">
